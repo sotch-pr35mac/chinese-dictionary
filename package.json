@@ -1,0 +1,18 @@
+{
+  "name": "chinese-dictionary",
+  "version": "1.0.0",
+  "description": "A searchable Chinese / English dictionary with helpful utilities.",
+  "main": "lib/index.js",
+  "author": "Preston Wang-Stosur-Bassett <p.wanstobas@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "neon-cli": "^0.6.0"
+  },
+  "scripts": {
+    "install": "neon build",
+    "test": "mocha"
+  },
+  "devDependencies": {
+    "mocha": "^8.2.1"
+  }
+}
