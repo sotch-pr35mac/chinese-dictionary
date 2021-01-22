@@ -5,14 +5,35 @@
   "main": "lib/index.js",
   "author": "Preston Wang-Stosur-Bassett <p.wanstobas@gmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sotch-pr35mac/chinese-dictionary.git"
+  },
   "dependencies": {
     "neon-cli": "^0.6.0"
   },
   "scripts": {
-    "install": "neon build",
+    "build": "neon build",
+    "build-release": "neon build --release",
+    "install": "node-pre-gyp install --fallback-to-build=false || neaon build --release",
+    "package": "node-pre-gyp package",
+    "upload-binary": "node-pre-gyp package && node-pre-gyp-github publish",
     "test": "mocha"
   },
   "devDependencies": {
-    "mocha": "^8.2.1"
+    "mocha": "^8.2.1",
+    "node-pre-gyp": "^0.17.0",
+    "node-pre-gyp-github": "^1.4.3"
+  },
+  "files": [
+    "lib"
+  ],
+  "binary": {
+    "module_name": "index",
+    "host": "https://github.com/sotch-pr35mac/chinese-dictionary/releases/download/",
+    "remote_path": "{version}",
+    "package_name": "{node_abi}-{platform}-{arch}.tar.gz",
+    "module_poth": "./native",
+    "pkg_path": "."
   }
 }
