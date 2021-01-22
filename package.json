@@ -15,7 +15,7 @@
   "scripts": {
     "build": "neon build",
     "build-release": "neon build --release",
-    "install": "node-pre-gyp install --fallback-to-build=false || neaon build --release",
+    "install": "node-pre-gyp install --fallback-to-build=false || neon build --release",
     "package": "node-pre-gyp package",
     "upload-binary": "node-pre-gyp package && node-pre-gyp-github publish",
     "test": "mocha"
@@ -33,7 +33,7 @@
     "host": "https://github.com/sotch-pr35mac/chinese-dictionary/releases/download/",
     "remote_path": "{version}",
     "package_name": "{node_abi}-{platform}-{arch}.tar.gz",
-    "module_poth": "./native",
+    "module_path": "./native",
     "pkg_path": "."
   }
 }

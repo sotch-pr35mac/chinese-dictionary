@@ -97,7 +97,7 @@ fn classify(mut cx: FunctionContext) -> JsResult<JsString> {
 			Some(dictionary) => {
 				Ok(cx.string(match dictionary.classify(&input) {
 					EN => "EN",
-					PY => "PY",,
+					PY => "PY",
 					ZH => "ZH",
 					_ => "UN"
 				}))
