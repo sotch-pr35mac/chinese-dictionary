@@ -4,9 +4,11 @@ os:
 language: node_js
 node_js:
   - node
+  - 15
+  - 14
+  - 13
+  - 12
   - 10
-  - 9
-  - 8
 cache: cargo
 before_install:
   # Install Rust and Cargo
