@@ -1,6 +1,9 @@
 # chinese-dictionary
 
+[![Build Status](https://travis-ci.com/sotch-pr35mac/chinese-dictionary.svg?branch=master)](https://travis-ci.com/sotch-pr35mac/chinese-dictionary)
+
 ### About
+
 A searchable Chinese / English dictionary with helpful utilities.
 
 ### Features
