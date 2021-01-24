@@ -3,8 +3,18 @@
   "version": "1.0.0",
   "description": "A searchable Chinese / English dictionary with helpful utilities.",
   "main": "lib/index.js",
+  "homepage": "https://github.com/sotch-pr35mac/chinese-dictionary",
   "author": "Preston Wang-Stosur-Bassett <p.wanstobas@gmail.com>",
   "license": "MIT",
+  "keywords": [
+    "chinese",
+    "dictionary",
+    "hanzi",
+    "cc-cedict",
+    "classify",
+    "pinyin",
+    "english"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sotch-pr35mac/chinese-dictionary.git"
