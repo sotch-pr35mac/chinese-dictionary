@@ -1,6 +1,6 @@
 {
   "name": "chinese-dictionary",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A searchable Chinese / English dictionary with helpful utilities.",
   "main": "lib/index.js",
   "homepage": "https://github.com/sotch-pr35mac/chinese-dictionary",
@@ -20,7 +20,8 @@
     "url": "git+https://github.com/sotch-pr35mac/chinese-dictionary.git"
   },
   "dependencies": {
-    "neon-cli": "^0.6.0"
+    "neon-cli": "^0.6.0",
+    "node-pre-gyp": "^0.17.0"
   },
   "scripts": {
     "build": "neon build",
@@ -32,7 +33,6 @@
   },
   "devDependencies": {
     "mocha": "^8.2.1",
-    "node-pre-gyp": "^0.17.0",
     "node-pre-gyp-github": "^1.4.3"
   },
   "files": [
