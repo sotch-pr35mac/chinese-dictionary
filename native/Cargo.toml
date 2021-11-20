@@ -12,8 +12,8 @@ name = "chinese_dictionary_neon"
 crate-type = ["cdylib"]
 
 [build-dependencies]
-neon-build = "0.6.0"
+neon-build = "0.9.1"
 
 [dependencies]
-neon = "0.6.0"
+neon = "0.9.1"
 chinese_dictionary = "1.0.1"
