@@ -1,6 +1,6 @@
 [package]
 name = "chinese-dictionary"
-version = "1.0.0"
+version = "1.0.1"
 authors = ["Preston Wang-Stosur-Bassett <p.wanstobas@gmail.com>"]
 license = "MIT"
 build = "build.rs"
@@ -16,4 +16,4 @@ neon-build = "0.9.1"
 
 [dependencies]
 neon = "0.9.1"
-chinese_dictionary = "1.0.1"
+chinese_dictionary = "2.0.0"

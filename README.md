@@ -19,12 +19,22 @@ npm install chinese-dictionary --save
 ```
 
 ### Usage
+Initialization is optional. If `.init()` is not called required values will be lazy loaded once.
+```js
+const dictionary = require('chinese-dictionary');
+
+// Make a query directly
+dictionary.query('test').then(result => console.log(result));
+
+// Or make a query once required data is loaded
+dictionary.init().then(() => dictionary.query('test').then(result => console.log(result)));
+```
 
 Querying the dictionary
 ```js
 const dictionary = require('chinese-dictionary');
 
-dictionary.init().then(() => { // Initialization may take a while
+dictionary.init().then(() => { 
 	dictionary.query('test').then(result => {
 		// Learn more about the dictionary entry format below
 		console.log(result[0].simplified); // --> '实验'
@@ -36,7 +46,7 @@ Classying a string of text
 ```js
 const dictionary = require('chinese-dictionary');
 
-dictionary.init().then(() => { // Initialization may take a while
+dictionary.init().then(() => { 
 	dictionary.classify('test').then(result => {
 		// There are four possible return options
 		// from the classify function:
@@ -53,7 +63,7 @@ Convert between Traditional and Simplified Chinese characters
 ```js
 const dictionary = require('chinese-dictionary');
 
-dictionary.init().then(() => { // Initialization may take a while
+dictionary.init().then(() => { 
 	dictionary.convertToTraditional('实验').then(result => console.log(result)); // --> 實驗
 	dictionary.convertToSimplified('實驗').then(result => console.log(result)); // --> 实验
 
@@ -66,7 +76,7 @@ Segment a string of characters
 ```js
 const dictionary = require('chinese-dictionary');
 
-dictionary.init().then(() => { // Initialization may take a while
+dictionary.init().then(() => { 
 	dictionary.segment('今天天气不错').then(result => console.log(result)); // --> ['今天', '天气', '不错']
 });
 ```

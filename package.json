@@ -1,6 +1,6 @@
 {
   "name": "chinese-dictionary",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A searchable Chinese / English dictionary with helpful utilities.",
   "main": "lib/index.js",
   "homepage": "https://github.com/sotch-pr35mac/chinese-dictionary",
@@ -32,8 +32,8 @@
     "test": "mocha"
   },
   "devDependencies": {
-    "mocha": "^8.2.1",
-    "@mmomtchev/node-pre-gyp-github": "^2.0.2"
+    "@mmomtchev/node-pre-gyp-github": "^2.0.2",
+    "mocha": "^10.0.0"
   },
   "files": [
     "lib"
