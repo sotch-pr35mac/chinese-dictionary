@@ -5,35 +5,35 @@ dictionary.init().then(() => {
 	describe('Chinese Dictionary', () => {
 		describe('query', () => {
 			it('should return the correct dictionary entries', () => {
-				dictionary.query('test').then(result => {
+				return dictionary.query('test').then(result => {
 					assert.equal(result[0].traditional, '實驗');
 				});
 			});
 		});
 		describe('queryByChinese', () => {
 			it('should return the correct dictionary entries', () => {
-				dictionary.queryByChinese('天气').then(result => {
+				return dictionary.queryByChinese('天气').then(result => {
 					assert.equal(result[0].english[0], 'weather');
 				});
 			});
 		});
 		describe('queryByPinyin', () => {
 			it('should return the correct dictionary entries', () => {
-				dictionary.queryByPinyin('tianqi').then(result => {
+				return dictionary.queryByPinyin('tianqi').then(result => {
 					assert.equal(result[0].english[0], 'weather');
 				});
 			});
 		});
 		describe('queryByEnglish', () => {
 			it('should return the correct dictionary entries', () => {
-				dictionary.queryByEnglish('test').then(result => {
+				return dictionary.queryByEnglish('test').then(result => {
 					assert.equal(result[0].simplified, '实验');
 				});
 			});
 		});
 		describe('segment', () => {
 			it('should correctly segment a sentence', () => {
-				dictionary.segment('今天的天气还可以吧').then(result => {
+				return dictionary.segment('今天的天气还可以吧').then(result => {
 					assert.equal(result[0], '今天');
 				});
 			});
@@ -56,31 +56,31 @@ dictionary.init().then(() => {
 		});
 		describe('convertToTraditional', () => {
 			it('should return traditional characters when given a simplified string', () => {
-				dictionary.convertToTraditional('汉语').then(result => {
+				return dictionary.convertToTraditional('汉语').then(result => {
 					assert.equal(dictionary.isTraditional(result), true);
 				});
 			});
 		});
 		describe('convertToSimplified', () => {
 			it('should return simplified characters when given a traditional string', () => {
-				dictionary.convertToSimplified('漢語').then(result => {
+				return dictionary.convertToSimplified('漢語').then(result => {
 					assert.equal(dictionary.isSimplified(result), true);
 				});
 			});
 		});
 		describe('classify', () => {
 			it('should correctly classify an english string', () => {
-				dictionary.classify('test').then(result => {
+				return dictionary.classify('test').then(result => {
 					assert.equal(result, 'EN');
 				});
 			});
 			it('should correctly classify a pinyin string', () => {
-				dictionary.classify('shiyan').then(result => {
+				return dictionary.classify('shiyan').then(result => {
 					assert.equal(result, 'PY');
 				});
 			});
 			it('should correctly classify a string of Chinese characters', () => {
-				dictionary.classify('实验').then(result => {
+				return dictionary.classify('实验').then(result => {
 					assert.equal(result, 'ZH');
 				});
 			});
