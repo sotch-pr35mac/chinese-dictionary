@@ -1,0 +1,130 @@
+version: 2.1
+
+orbs:
+  windows: circleci/windows@4.1.1
+  node: circleci/node@5.0.2
+  rust: circleci/rust@1.6.0
+
+executors:
+  linux:
+    machine:
+      image: "ubuntu-2204:current"
+  macos:
+    macos:
+      xcode: 13.4.0
+  windows: windows/default
+
+jobs:
+  nix-build-and-test:
+    parameters:
+      platform:
+        type: executor
+      node-version:
+        type: string
+    executor: << parameters.platform >>
+    steps:
+      - checkout
+      - node/install:
+         node-version: << parameters.node-version >>
+      - run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+      - run: nvm install << parameters.node-version >>
+      - run: nvm use << parameters.node-version >>
+      - run: npm install
+      - run: npm test
+
+  nix-package-and-deploy:
+    parameters:
+      platform:
+        type: executor
+      node-version:
+        type: string
+    executor: << parameters.platform >>
+    steps:
+      - checkout
+      - node/install:
+          node-version: << parameters.node-version >>
+      - run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+      - run: nvm install << parameters.node-version >>
+      - run: nvm use << parameters.node-version >>
+      - run: npm install
+      - run: npm run build-release
+      - run: npm run package
+      - run: npm upload-binary
+
+  windows-build-and-test:
+    parameters:
+      platform:
+        type: executor
+      node-version:
+        type: string
+    executor: << parameters.platform >>
+    steps:
+      - checkout
+      - run: Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+      - run: cinst nodejs.install
+      - run:
+          shell: bash
+          command: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+      - run: nvm install << parameters.node-version >>
+      - run: nvm use << parameters.node-version >>
+      - run: npm install
+      - run: npm test
+
+  windows-package-and-deploy:
+    parameters:
+      platform:
+        type: executor
+      node-version:
+        type: string
+    executor: << parameters.platform >>
+    steps:
+      - checkout
+      - run: Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+      - run: cinst nodejs.install
+      - run:
+          shell: bash
+          command: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+      - run: nvm install << parameters.node-version >>
+      - run: nvm use << parameters.node-version >>
+      - run: npm install
+      - run: npm run build-release
+      - run: npm run package
+      - run: npm run upload-binary
+
+workflows:
+  build-test-deploy:
+    jobs:
+      - nix-build-and-test:
+         matrix:
+          parameters:
+            platform: [linux, macos]
+            node-version: ["18.6.0", "16.16.0", "14.0.0"]
+      - windows-build-and-test:
+         matrix:
+          parameters:
+            platform: [windows]
+            node-version: ["14.0.0"]
+      - nix-package-and-deploy:
+          requires:
+            - nix-build-and-test
+          filters:
+            tags:
+              only: /^(\d+\.)?(\d+\.)?(\*|\d+)$/
+            branches:
+              ignore: /.*/
+          matrix:
+            parameters:
+              platform: [linux, macos]
+              node-version: ["18.6.0", "16.6.0", "14.0.0"]
+      - windows-package-and-deploy:
+          requires:
+            - windows-build-and-test
+          filters:
+            tags:
+              only: /^(\d+\.)?(\d+\.)?(\*|\d+)$/
+            branches:
+              ignore: /.*/
+          matrix:
+            parameters:
+              platform: [linux, macos]
+              node-version: ["14.0.0"]
