@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@mapbox/node-pre-gyp": "^1.0.7",
-    "neon-cli": "^0.9.1"
+    "neon-cli": "^0.10.1"
   },
   "scripts": {
     "build": "neon build",
