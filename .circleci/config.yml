@@ -95,11 +95,17 @@ workflows:
   build-test-deploy:
     jobs:
       - nix-build-and-test:
+         filters:
+          tags:
+            only: /.*/
          matrix:
           parameters:
             platform: [linux, macos]
             node-version: ["18.6.0", "16.16.0", "14.0.0"]
       - windows-build-and-test:
+         filters:
+          tags:
+            only: /.*/
          matrix:
           parameters:
             platform: [windows]
@@ -109,7 +115,7 @@ workflows:
             - nix-build-and-test
           filters:
             tags:
-              only: /^(\d+\.)?(\d+\.)?(\*|\d+)$/
+              only: ["1.1.2"]
             branches:
               ignore: /.*/
           matrix:
@@ -121,10 +127,10 @@ workflows:
             - windows-build-and-test
           filters:
             tags:
-              only: /^(\d+\.)?(\d+\.)?(\*|\d+)$/
+              only: ["1.1.2"]
             branches:
               ignore: /.*/
           matrix:
             parameters:
-              platform: [linux, macos]
+              platform: [windows]
               node-version: ["14.0.0"]
